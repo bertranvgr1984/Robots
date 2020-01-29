@@ -17,16 +17,47 @@ namespace CEDBCN_MonitorIT.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Nuestra pagina de descripción de la aplicación.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Nuestra página de contacto.";
 
             return View();
+        }
+
+        public IActionResult EstadoRobots()
+        {
+            ViewData["Message"] = "Pagina con el Estado de los Robots.";
+
+            ConsultaEstadoRobots ce = new ConsultaEstadoRobots();
+            return View(ce.RecuperarTodos());
+            //return View(GetAllRobots());
+
+            //return View();
+        }
+
+        public IActionResult EstadoCasos()
+        {
+            ViewData["Message"] = "Pagina con el Estado de los Casos.";
+
+            ConsultaCasosRobots cr = new ConsultaCasosRobots();
+            return View(cr.RecuperarTodosCasosNoAperturados());
+
+            //return View();
+        }
+
+        public IActionResult EstadoServers()
+        {
+            ViewData["Message"] = "Pagina con el Estado de los Servidores.";
+
+            ConsultaServers cs = new ConsultaServers();
+            return View(cs.RecuperarTodos());
+
+            //return View();
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CEDBCN_MonitorIT.Models.Caso_Robot>
+
+@{
+    ViewData["Title"] = "Estado Casos";
+}
+
+@*<h2><u>@ViewData["Title"]</u></h2>
+<h4>@ViewData["Message"]</h4>*@
+
+<br />
+<br />
+
+<h3>Casos No Aperturados (Ultimos 10):</h3>
+
+<table class="table alert-danger">
+    <tr class ="btn-danger">
+        <th>
+            ID_CasoRobot
+        </th>
+        <th>
+            ID Sucursal
+        </th>
+        <th>
+            Nombre Cia
+        </th>
+        <th>
+            Siniestro
+        </th>
+        <th>
+            Lesionado
+        </th>
+        <th>
+            FinCorrecto
+        </th>
+        @*<th>
+                Borrar
+            </th>
+            <th>
+                Modificar
+            </th>*@
+    </tr>
+
+    @foreach (var caso in Model)
+    {
+        <tr>
+            <td>
+                @caso.ID_CasoRobot
+            </td>
+            <td>
+                @caso.SucursalID
+            </td>
+            <td>
+                @caso.NomCompania
+            </td>
+            <td>
+                @caso.Siniestro
+            </td>
+            <td>
+                @caso.Lesionado
+            </td>
+            <td>
+                @caso.FinCorrecto  <a href="">(Ver)</a>
+            </td>
+            @*<td>
+                    <a href="/Home/Baja?cod=@articulo.Codigo">borra?</a>
+                </td>
+                <td>
+                    <a href="/Home/Modificacion?cod=@articulo.Codigo">modifica?</a>
+                </td>*@
+        </tr>
+    }
+
+</table>
+@*<a href="/Home/Alta">Agregar</a>*@
+<a href="">Agregar</a>
+
+
+
+
+

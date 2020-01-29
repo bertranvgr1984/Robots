@@ -338,3 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/CEDBCN_MonitorIT/bower_components/bootstrap/js/tests/unit

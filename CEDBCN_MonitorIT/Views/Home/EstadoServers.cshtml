@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CEDBCN_MonitorIT.Models.MonitorServers>
+
+@{
+    ViewData["Title"] = "Estado Servidores";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Aquí se mostrará el Estado de los Servidores de RDS y Citrix.</p>
+
+<h3>Servidor RDS</h3>
+    <table class="table-responsive">
+        @foreach (var server in Model)
+        {
+            @*@DataTable dt = new DataTable();*@
+            <tr>
+                @if (server.TipoServidor == "RDS")
+                {
+                    <th>
+                        @server.Servidor
+                    </th>
+                    <th>
+                        MEMORIA
+                    </th>
+                    <th>
+                        CPU
+                    </th>
+                }
+                else
+                {
+                    continue;
+                }
+            </tr>
+            <tr>
+                @if (server.usuarios.Contains("-"))
+                {
+                    string[] desgloseUsuarios = server.usuarios.Trim(' ').Split("-");
+                    <td>
+                        <ul>
+                            <b>Usuarios:</b>
+                            @for (int i = 0; i < desgloseUsuarios.Length; i++)
+                            {
+                                @if (desgloseUsuarios[i] == "")
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    <li>    @desgloseUsuarios[i]</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (@server.memoria >= 80)
+                        {
+                            <p class="text-danger"> @server.memoria %</p>
+                        }
+                        else
+                        {
+                            <p>@server.memoria %</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@server.cpu >= 80)
+                        {
+                            <p class="text-danger">@server.cpu %</p>
+                        }
+                        else
+                        {
+                            <p>@server.cpu %</p>
+                        }
+
+                    </td>
+                }
+                else
+                {
+                    continue;
+                }
+            </tr>
+
+        }
+    </table>
+
+@*<a href="/Home/Alta">Agregar</a>*@
+@*<a href="">Agregar</a>*@
+
+
+<h3>Servidor CITRIX</h3>

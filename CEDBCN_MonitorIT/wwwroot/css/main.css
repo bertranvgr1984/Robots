@@ -1,0 +1,111 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    column-count: 1;
+    column-gap: 2em;
+    column-rule: 1px solid #bbb;
+}*/
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+
+/*.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+main {
+    column-count: 2;
+    column-gap: 3em;
+    column-rule: 1px solid #bbb;
+}
+.jumbotron {
+    font-family: Rockwell;
+}*/
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.bertran-navbar-li {
+    font-size: 16px;
+    font-family: Rockwell;
+    color: white;
+}
+
+.bertran-navbar-li:hover {
+    color: dodgerblue;
+}
+
+.bertran-navbar-li-Home {
+    font-size: 22px;
+    font-family: Rockwell;
+    color: lawngreen;
+}
+
+.bertran-navbar-li-Home:hover {
+    color:forestgreen;
+}
+
+.bertran-navbar-li-navbar-brand {
+    /* 20200128 VGR: Viene de bootstrap.css navbar-brand*/
+    display: inline-block;
+    padding-bottom: 0.2359375rem;
+    margin-right: 2rem;
+    /*font-size: 2.09375rem;*/
+    line-height: inherit;
+    white-space: nowrap;
+    font-size: 26px;
+    font-family: Rockwell;
+    color: dodgerblue;
+    margin-top: 0.12em
+}
+
+.bertran-navbar-li-navbar-brand:hover {
+    color: lightblue;
+}
+
+.bertran-col {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1 .05rem;
+    min-height: 1px;
+    border-left-style: outset;
+    border-left-color: lightgray;
+    border-bottom-style: outset;
+    border-bottom-color: lightgray;
+    border-right-style: outset;
+    border-right-color: lightgray;
+    border-top-style: outset;
+    border-top-color: lightgray;
+    margin-right: 1em;
+    margin-bottom: 3em;
+}
+
+.bertran-col-head {
+    border-left-style: outset;
+    border-left-color: lightgray;
+    border-bottom-style: outset;
+    border-bottom-color: lightgray;
+    border-right-style: outset;
+    border-right-color: lightgray;
+    border-top-style: outset;
+    border-top-color: lightgray;
+    font-size: 19px;
+    font-family: Rockwell;
+    margin-right: 2em;
+    margin-bottom: 3em;
+}
+
+
+
+
