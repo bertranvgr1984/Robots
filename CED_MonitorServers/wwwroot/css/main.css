@@ -164,6 +164,7 @@ top h3 {
     display: inline-block;
     height: 7px;
     margin-top: 2px;
+    margin-bottom: 2px;
     float: left;
     clear: left;
     margin-left: -100px;
@@ -226,9 +227,12 @@ top h3 {
         max-width: 880px
     }
 }
-/*
-.top-nav .green-line, .blue-line, .purple-line {
-    width="150"
+
+.top .top-nav  {
+    margin-bottom: 0.1px;
+    padding-bottom: 0.1px;
+    color: black;
+    background-color: white
 }
 
 
@@ -246,8 +250,8 @@ top h3 {
 
 top .top-nav .blue-line, top .top-nav .green-line, top .top-nav .purple-line {
     display: inline-block;
-    height: 7px;
-    margin-top: 7px;
+    height: 5px;
+    margin-top: 2px;
     width: 200px;
     float: left;
     clear: left;
@@ -319,9 +323,3 @@ top .top-nav .green-line {
         max-width: 880px
     }
 }
-
-top .doormat {
-    background: rgba(0,0,0,.8);
-    padding: 2em 0;
-    overflow: hidden
-}*/
