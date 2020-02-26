@@ -26,7 +26,33 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top purple">
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>
+    <div class="navbar-fixed-top">
+        <nav class="purple darken-1">
+            <div class="nav-wrapper">
+                @*<a asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">Logo</a>*@
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="bertran-navbar-li-navbar-brand left"><img src="~/images/logo_ced_200.png" class="img-responsive left" />MonitorIT</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="bertran-navbar-li-Home" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="About">Acerca de</a></li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoRobots">Estado Robots</a></li>
+                    @*<li><a class="bertran-navbar-li" asp-area="" asp-controller="CasoRobot" asp-action="EstadoCasos">Estado Casos</a></li>*@
+                    <li>@Html.ActionLink("Listado de casos NO Aperturados", "EstadoCasos", "CasoRobot")</li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoServers">Estado Servers</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Menú<i class="material-icons right">--></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    @*<nav class="navbar navbar-inverse navbar-fixed-top purple">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,23 +62,24 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="bertran-navbar-li-navbar-brand right"><img src="~/images/logo_ced_200.png" class="img-responsive left" />MonitorIT</a>
-            </div>
-            <div class="navbar-collapse collapse ">
-                <ul @*class="nav navbar-nav"*@>
-                    <li><a class="bertran-navbar-li-Home" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
-                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="About">Acerca de</a></li>
-                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
-                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoRobots">Estado Robots</a></li>
-                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoCasos">Estado Casos</a></li>
-                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoServers">Estado Servers</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            </div>*@
+    @*
+        <div class="navbar-collapse collapse ">
+            <ul @*class="nav navbar-nav">@*
+    <li><a class="bertran-navbar-li-Home" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="About">Acerca de</a></li>
+    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
+    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoRobots">Estado Robots</a></li>
+    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoCasos">Estado Casos</a></li>
+    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoServers">Estado Servers</a></li>
+    </ul>
+    </div>
+    </div>
+    </nav>*@
 
-    <partial name="_CookieConsentPartial" />
+    @*<partial name="_CookieConsentPartial" />*@
 
-    <div class="container">
+    <div class="bertran-body">
         @RenderBody()
 
         <hr />
@@ -73,11 +100,11 @@
     </environment>
     <environment exclude="Development">
         @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>*@
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>*@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"

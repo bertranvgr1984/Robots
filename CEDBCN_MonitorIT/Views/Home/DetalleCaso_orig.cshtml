@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CEDBCN_MonitorIT.Models.Caso_Robot>
+
+@{
+    ViewData["Title"] = "Estado Caso Fallido";
+}
+
+<br />
+<br />
+
+<h3>Caso Fallido:</h3>
+
+<main class="grid">
+    @{
+        var caso = ViewData["Caso_Robot"] as CEDBCN_MonitorIT.Models.Caso_Robot;
+    }
+    <article>
+        <div class="text">
+            <h4>
+                @caso.ID_CasoRobot
+            </h4>
+            <h4>
+                Cia Caso: @caso.NomCompania
+            </h4>
+            <p>
+                FechaWeb: @caso.FechaWeb.ToString()
+            </p>
+            <p>
+                FechaEntrada: @caso.FechaEntrada.ToString()
+            </p>
+            <p>
+                <b>Siniestro:</b> @caso.Siniestro
+            </p>
+            <p>
+                <b>Lesionado:</b> @caso.Lesionado
+            </p>
+            <p>
+                CasoID: @caso.CasoID
+            </p>
+            <p>
+                TipoCaso: @caso.TipoCaso
+            </p>
+            <p>
+                TipoEncargo: @caso.TipoEncargo
+            </p>
+            <p>
+                Aperturado: @caso.Aperturado
+            </p>
+            <p>
+                GetDatos: @caso.GetDatos
+            <p>
+                SetDatos: @caso.SetDatos
+            </p>
+            <p>
+                UpObservacionesApertura: @caso.UpObservacionesApertura
+            </p>
+            <p>
+                Documentos: @caso.Documentos
+            </p>
+            <p>
+                UpDocumentos: @caso.UpDocumentos
+            </p>
+            <p>
+                Comunicaciones: @caso.Comunicaciones
+            </p>
+            <p>
+                UpComunicaciones: @caso.UpComunicaciones
+            </p>
+            <p>
+                Plataforma: @caso.Plataforma
+            </p>
+            <p>
+                FinCorrecto: @caso.FinCorrecto
+            </p>
+            <div>
+                Observaciones: @caso.Observaciones
+            </p>
+            }
+            else
+
+            <button>Ver Detalle</button>
+        </div>
+    </article>
+    }
+</main>

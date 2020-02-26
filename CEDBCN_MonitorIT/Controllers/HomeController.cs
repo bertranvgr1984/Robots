@@ -52,13 +52,25 @@ namespace CEDBCN_MonitorIT.Controllers
 
         public IActionResult EstadoServers()
         {
-            ViewData["Message"] = "Pagina con el Estado de los Servidores.";
+            ViewData["Message"] = "Pagina con el Estado de los Servidores y Servicios.";
 
             ConsultaServers cs = new ConsultaServers();
             return View(cs.RecuperarTodos());
 
             //return View();
         }
+
+        //public ViewResult DetalleCaso(int idCaso)
+        //{
+        //    ViewData["Message"] = "Pagina con el Estado de un caso fallido.";
+
+        //    ConsultaCasosRobots cr = new ConsultaCasosRobots();
+        //    return View(cr.RecuperarCasoFallido(idCaso));
+
+        //    //return View();
+        //}
+
+
 
         public IActionResult Privacy()
         {
@@ -70,5 +82,7 @@ namespace CEDBCN_MonitorIT.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }

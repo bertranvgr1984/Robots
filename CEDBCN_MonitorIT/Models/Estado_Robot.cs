@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CEDBCN_MonitorIT.Models
 {
-    public class Robot
+    public class Estado_Robot
     {
+        [Key]
         public int IDRobot { get; set; }
 
         public string Nombre { get; set; }
@@ -17,7 +18,7 @@ namespace CEDBCN_MonitorIT.Models
         [DataType(DataType.Date)]
         public DateTime F_UltimaActualizacion { get; set; }
 
-        public bool EnFuncionamiento { get; set; }
+        public string TipoRobot { get; set; }
 
         public string RobotPadre { get; set; }
 

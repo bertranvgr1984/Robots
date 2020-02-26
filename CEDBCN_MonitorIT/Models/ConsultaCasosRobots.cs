@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -46,7 +47,7 @@ namespace CEDBCN_MonitorIT.Models
             Conectar();
             List<Caso_Robot> casos = new List<Caso_Robot>();
 
-            SqlCommand com = new SqlCommand("select ID_CasoRobot,EjecucionID,Siniestro,Lesionado,NomCompania,FinCorrecto from dbo.Caso_Robot where FinCorrecto = 'N' and PLATAFORMA IS NULL order by ID_CasoRobot DESC", con);
+            SqlCommand com = new SqlCommand("select ID_CasoRobot,EjecucionID,Siniestro,Lesionado,NomCompania,Aperturado, UpDocumentos, UpComunicaciones, UpObservacionesApertura, FinCorrecto from dbo.Caso_Robot where FinCorrecto = 'N' and PLATAFORMA IS NULL order by ID_CasoRobot DESC", con);
             con.Open();
             SqlDataReader registros = com.ExecuteReader();
             while (registros.Read())
@@ -58,6 +59,10 @@ namespace CEDBCN_MonitorIT.Models
                     Siniestro = registros["Siniestro"].ToString(),
                     Lesionado = registros["Lesionado"].ToString(),
                     NomCompania = registros["NomCompania"].ToString(),
+                    Aperturado = registros["Aperturado"].ToString(),
+                    UpDocumentos = registros["UpDocumentos"].ToString(),
+                    UpComunicaciones = registros["UpComunicaciones"].ToString(),
+                    UpObservacionesApertura = registros["UpObservacionesApertura"].ToString(),
                     FinCorrecto = registros["FinCorrecto"].ToString()
                     //Precio = float.Parse(registros["precio"].ToString())
                 };
@@ -80,12 +85,6 @@ namespace CEDBCN_MonitorIT.Models
             Caso_Robot caso = new Caso_Robot();
             if (registros.Read())
             {
-                //ID_CasoRobot = int.Parse(registros["ID_CasoRobot"].ToString()),
-                //EjecucionID = int.Parse(registros["EjecucionID"].ToString()),
-                //Siniestro = registros["Siniestro"].ToString(),
-                //Lesionado = registros["Lesionado"].ToString(),
-                //NomCompania = registros["NomCompania"].ToString(),
-                //Aperturado = registros["Aperturado"].ToString()
 
                 caso.ID_CasoRobot = int.Parse(registros["ID_CasoRobot"].ToString());
                 caso.EjecucionID = int.Parse(registros["EjecucionID"].ToString());
@@ -99,6 +98,48 @@ namespace CEDBCN_MonitorIT.Models
             return caso;
         }
 
-        //public Caso_Robot 
+        public Caso_Robot RecuperarCasoFallido(int idcaso)
+        {
+            Conectar();
+            SqlCommand comando = new SqlCommand("select * from dbo.Caso_Robot where ID_CasoRobot=@idcaso", con);
+            comando.Parameters.Add("@idcaso", SqlDbType.Int);
+            comando.Parameters["@idcaso"].Value = idcaso;
+
+            con.Open();
+            SqlDataReader registros = comando.ExecuteReader();
+            Caso_Robot caso = new Caso_Robot();
+            if (registros.Read())
+            {
+
+                caso.ID_CasoRobot = int.Parse(registros["ID_CasoRobot"].ToString());
+                caso.EjecucionID = int.Parse(registros["EjecucionID"].ToString());
+                caso.CiaID = int.Parse(registros["EjecucionID"].ToString());
+                caso.NomCompania = registros["NomCompania"].ToString();
+                if (registros["SucursalID"].ToString() != "" && registros["SucursalID"].ToString() != null)
+                    caso.SucursalID = int.Parse(registros["SucursalID"].ToString());
+                if (registros["FechaWeb"].ToString() != "" && registros["FechaWeb"].ToString() != null)
+                    caso.FechaWeb = DateTime.Parse(registros["FechaWeb"].ToString());
+                if (registros["FechaEntrada"].ToString() != "" && registros["FechaEntrada"].ToString() != null)
+                    caso.FechaEntrada = DateTime.Parse(registros["FechaEntrada"].ToString());
+                caso.Siniestro = registros["Siniestro"].ToString();
+                caso.Lesionado = registros["Lesionado"].ToString();
+                caso.CasoID = int.Parse(registros["CasoID"].ToString());
+                caso.TipoCaso = registros["TipoCaso"].ToString();
+                caso.TipoEncargo = registros["TipoEncargo"].ToString();
+                caso.Aperturado = registros["Aperturado"].ToString();
+                caso.GetDatos = registros["GetDatos"].ToString();
+                caso.SetDatos = registros["SetDatos"].ToString();
+                caso.UpObservacionesApertura = registros["UpObservacionesApertura"].ToString();
+                caso.Documentos = registros["Documentos"].ToString();
+                caso.UpDocumentos = registros["UpDocumentos"].ToString();
+                caso.Comunicaciones = registros["Comunicaciones"].ToString();
+                caso.UpComunicaciones = registros["UpComunicaciones"].ToString();
+                caso.Plataforma = registros["Plataforma"].ToString();
+                caso.FinCorrecto = registros["FinCorrecto"].ToString();
+                caso.Observaciones = registros["Observaciones"].ToString();
+            }
+            con.Close();
+            return caso;
+        }
     }
 }

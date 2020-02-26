@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="Stylesheet" href="~/css/main.css" />
+    @*<link rel="Stylesheet" href="~/css/ced-main.css" />*@
+    <title>Estado Servers BCN-MAD</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/css/materialize.min.css" media="screen,projection" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <!-- Dropdown Structure -->
+    @*<ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>*@
+    @*<div class="navbar-fixed-top">
+        <nav class="purple darken-1">
+            <div class="nav-wrapper">
+
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="bertran-navbar-li-navbar-brand left"><img src="~/images/logo_ced_200.png" class="img-responsive left" />MonitorIT</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="bertran-navbar-li-Home" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
+                    <li><a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="EstadoServers">Estado Servers</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>*@
+
+    <div class="bertran-body">
+        @RenderBody()
+
+        <hr />
+    </div>
+    <div class="container">
+        <footer>
+            <p>&copy; 2020 - CEDBCN_MonitorIT</p>
+        </footer>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="~/js/materialize.min.js"></script>
+    <environment include="Desarrollo">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

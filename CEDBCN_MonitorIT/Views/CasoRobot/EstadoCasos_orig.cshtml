@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CEDBCN_MonitorIT.Models.Caso_Robot>
+
+@{
+    ViewData["Title"] = "Estado Casos";
+}
+
+@*<h2><u>@ViewData["Title"]</u></h2>
+<h4>@ViewData["Message"]</h4>*@
+
+<br />
+<br />
+
+<h3>Casos No Aperturados (Ultimos 10):</h3>
+
+<table class="table alert-danger">
+    <tr class="btn-danger">
+        <th>
+            ID_CasoRobot
+        </th>
+        <th>
+            ID Sucursal
+        </th>
+        <th>
+            Nombre Cia
+        </th>
+        <th>
+            Siniestro
+        </th>
+        <th>
+            Lesionado
+        </th>
+        <th>
+            FinCorrecto
+        </th>
+        <th>
+            <u>ACCION</u>
+        </th>
+        @*<th>
+            Borrar
+        </th>
+        <th>
+            Modificar
+        </th>*@
+    </tr>
+
+    @foreach (var caso in Model)
+    {
+<tr>
+    <td class="center">
+        @caso.ID_CasoRobot
+    </td>
+    <td class="center">
+        @caso.SucursalID
+    </td>
+    <td class="center">
+        @caso.NomCompania
+    </td>
+    <td class="center">
+        @caso.Siniestro
+    </td>
+    <td class="center">
+        @caso.Lesionado
+    </td>
+    <td class="center">
+        @caso.FinCorrecto
+    </td>
+    <td class="center">
+        @Html.ActionLink("Ver", "./DetalleCaso", new { id = @caso.ID_CasoRobot })
+        @*return RedirectToPage("/BlogPosts/Edit", new { id = blogId });*@
+    </td>
+    @*@caso.FinCorrecto   <a href="/Home/DetalleCaso?idcaso=@caso.ID_CasoRobot">Ver</a> @*<a class="bertran-navbar-li" asp-area="" asp-controller="Home" asp-action="@Caso_Robot.">Ver (Caso: @caso.ID_CasoRobot)</a>*@
+    @*<td>
+            <a href="/Home/Baja?cod=@articulo.Codigo">borra?</a>
+        </td>
+        <td>
+            <a href="/Home/Modificacion?cod=@articulo.Codigo">modifica?</a>
+        </td>*@
+</tr>
+    }
+
+</table>
+@*<a href="/Home/Alta">Agregar</a>*@
+
+
+
+
+

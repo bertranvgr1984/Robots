@@ -1,0 +1,129 @@
+﻿@*@page*@
+@model CEDBCN_MonitorIT.Models.Caso_Robot
+
+@{
+    ViewData["Title"] = "Detalle Casos";
+}
+
+<h1>Detalle Caso</h1>
+
+<div class="jumbotron">>
+    <h4>Caso:</h4><h5>@Html.DisplayNameFor(model => model.Siniestro)</h5>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID_CasoRobot)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CasoID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Siniestro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Lesionado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomCompania)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Aperturado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetDatos)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SetDatos)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UpObservacionesApertura)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Comunicaciones)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UpComunicaciones)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Documentos)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UpDocumentos)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plataforma)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FinCorrecto)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+        @*<dd class="col-sm-10">
+                <table class="table">
+                    <tr>
+                        <th>Course Title</th>
+                        <th>Grade</th>
+                    </tr>
+                    @foreach (var item in Model.Student.Enrollments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>*@
+    </dl>
+</div>
+<div>
+    @*<a asp-page="./Edit" asp-route-id="@Model.ID_CasoRobot">Editar</a> |*@
+    <a asp-page="./Index">Volver a la lista</a>
+</div>
+
+
+
+
+@*<div>
+        Siniestro : @caso.Siniestro
+    </div>
+    <div>
+        Lesionado : @caso.Lesionado
+    </div>
+    <div>
+        TipoCaso: @caso.TipoCaso
+    </div>
+    <div>
+        Aperturado: @caso.Aperturado
+    </div>
+    <div>
+        GetDatos: @caso.GetDatos
+    </div>
+    <div>
+        SetDatos: @caso.SetDatos
+    </div>
+    <div>
+        UpObservacionesApertura: @caso.UpObservacionesApertura
+    </div>
+    <div>
+        Documentos: @caso.Documentos
+    </div>
+    <div>
+        UpDocumentos: @caso.UpDocumentos
+    </div>
+    <div>
+        Comunicaciones: @caso.Comunicaciones
+    </div>
+    <div>
+        UpComunicaciones: @caso.UpComunicaciones
+    </div>
+    <div>
+        Plataforma: @caso.Plataforma
+    </div>
+        </div>
+    </body>
+    </html>*@

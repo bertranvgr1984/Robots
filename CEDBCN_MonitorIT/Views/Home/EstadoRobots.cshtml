@@ -1,222 +1,101 @@
-﻿@model IEnumerable<CEDBCN_MonitorIT.Models.Robot>
+﻿@model IEnumerable<CEDBCN_MonitorIT.Models.Estado_Robot>
 
-@{
+@*@{
     ViewData["Title"] = "Estado Robots";
-}
+}*@
 
-@*<h2>@ViewData["Title"]</h2>
+<h2>@ViewData["Title"]</h2>
     <h3>@ViewData["Message"]</h3>
 
-    <p>Aquí se mostrará el Estado de los Robots.</p>*@
+    <p>Aquí se mostrará el Estado de los Robots.</p>
 
 <br />
 <h3><b><u>ROBOTS APERTURAS:</u></b></h3>
 
-@{
-    int contCol = 0;
-    int numRobots = Model.Count<Robot>();
-    if (numRobots > 5) { numRobots = 5; }
-    double perc = (100 / numRobots) + 1; // 20200128 VGR: Diferencia con MonitorIT_MAdrid que indica 1. Si colocamos 3 se cuadran las columnas
-    string colSize = Convert.ToString(perc) + "%";
-}
-
-
-<div class="row">
-    
-        @foreach (var robot in Model)
-        {
-            @if ((robot.Nombre.Contains("ALLIANZ") || robot.Nombre.Contains("FENIX") || robot.Nombre.Contains("HELVETIA")) && robot.Nombre.Contains("_PLAT"))
+<main class="grid jumbotron">
+    @foreach (var robot in Model)
+    {
+        @*@if (robot.ErroresDia == 0)
             {
-                continue;
+                <article class="alert-success">
             }
-    <div id="dataListItem" class="bertran-col col-md-pull-3">
-
-        @{string nombreRobot = "";}
+            else
+            {
+                <article class="alert-danger">
+            }*@
         @if (robot.Nombre.Contains("OCASO"))
         {
             continue;
         }
-        else
+        @if (robot.TipoRobot == "PLATAFORMAS")
         {
-            nombreRobot = robot.Nombre;
-            if (nombreRobot.Length > 7)
-            {
-                nombreRobot = nombreRobot.Substring(0, 7);
-            }
+            continue;
         }
+        <article>
+            @{string nombreImagen = @robot.Nombre + ".png";}
+            <img src="~/images/img_robots/@nombreImagen" class="img-responsive" alt=@robot.Nombre height="20px">
+            @*<img src="~/images/img_robots/Allianz.png" alt="Sample photo">*@
+            <div class="text">
+                @{string nombreRobot = @robot.Nombre;}
 
-        @if (robot.ErroresDia == 0)
-        {
-            <h3 class="alert-success bertran-col-head">
-                @nombreRobot
-            </h3>
-        }
-        else
-        {
-            <h3 class="alert-danger bertran-col-head">
-                @nombreRobot
-            </h3>
-        }
+                @*<h3 class="alert-success bertran-col-head">
+                            @nombreRobot
+                        </h3>
 
-        <p>
-            Robot Padre: @robot.RobotPadre
-        </p>
+                        <h3 class="alert-danger bertran-col-head">
+                            @nombreRobot
+                    </h3>*@
 
-        <p>
-            Estado: @robot.Estado
-        </p>
-
-        <p>
-            Ultima Actualización: @robot.F_UltimaActualizacion
-        </p>
-
-        <p>
-            Errores Dia: @robot.ErroresDia
-        </p>
-
-        <p>
-            Errores Corregidos: @robot.ErroresCorregidos
-        </p>
-
-
-        @if (!robot.Nombre.Contains("_PLAT"))
-        {
-            <p>
-                Total Aperturas: @robot.TotalAP_PLAT
-            </p>
-        }
-        else
-        {
-            <p>
-                Total Plataformas: @robot.TotalAP_PLAT
-            </p>
-        }
-
-        <p>
-            Total Ejecuciones: @robot.TotalEjecuciones
-        </p>
-
-    </div>
-
-        }
-    </div>
-    <br /><br />
-    <div class="row"></div>
-    <h3><b><u>ROBOTS PLATAFORMAS:</u></b></h3>
-    <div class="row">
-        @foreach (var robot in Model)
-        {
-            @if ((!robot.Nombre.Contains("ALLIANZ") && !robot.Nombre.Contains("FENIX") && !robot.Nombre.Contains("HELVETIA")) || robot.Nombre.Contains("_AP"))
-            {
-                continue;
-            }
-        <div id="dataListItem" class="bertran-col col-md-3">
-            @{string nombreRobot = "";}
-            @if (robot.Nombre.Contains("OCASO"))
-            {
-                continue;
-            }
-            else
-            {
-                nombreRobot = robot.Nombre;
-                if (nombreRobot.Length > 7)
-                {
-                    nombreRobot = nombreRobot.Substring(0, 7);
-                }
-            }
-
-            @if (robot.ErroresDia == 0)
-            {
-                <h3 class="alert-success bertran-col-head">
+                <h4>
+                    @if (nombreRobot.Length > 9 && (!robot.Nombre.Contains("ALLIANZ") && !robot.Nombre.Contains("FENIX") && !robot.Nombre.Contains("HELVETIA")))
+                    {
+                        nombreRobot = nombreRobot.Substring(0, 9) + ".";
+                    }
+                    else
+                    {
+                        @if (robot.Nombre.Contains("ALLIANZ") || robot.Nombre.Contains("FENIX") || robot.Nombre.Contains("HELVETIA"))
+                        {
+                            @if (robot.Nombre.Contains("ALLIANZ"))
+                            {
+                                nombreRobot = "ALLIANZ";
+                            }
+                            else if (robot.Nombre.Contains("FENIX"))
+                            {
+                                nombreRobot = "FENIX";
+                            }
+                            else
+                            {
+                                nombreRobot = "HELVETIA";
+                            }
+                        }
+                    }
                     @nombreRobot
-                </h3>
-            }
-            else
-            {
-                <h3 class="alert-danger bertran-col-head">
-                    @nombreRobot
-                </h3>
-            }
-
-            <p>
-                Robot Padre: @robot.RobotPadre
-            </p>
-
-            <p>
-                Estado: @robot.Estado
-            </p>
-
-            <p>
-                Ultima Actualización: @robot.F_UltimaActualizacion
-            </p>
-
-            <p>
-                Errores Dia: @robot.ErroresDia
-            </p>
-
-            <p>
-                Errores Corregidos: @robot.ErroresCorregidos
-            </p>
-
-
-            @if (!robot.Nombre.Contains("_PLAT"))
-            {
-                <p>
-                    Total Aperturas: @robot.TotalAP_PLAT
-                </p>
-            }
-            else
-            {
-                <p>
-                    Total Plataformas: @robot.TotalAP_PLAT
-                </p>
-            }
-
-            <p>
-                Total Ejecuciones: @robot.TotalEjecuciones
-            </p>
-
-        </div>
-
-        }
-    </div>
-
-
-    @*
-        <div class="row">
-            @foreach (var robot in Model)
-            {
-            <div class="bertran-col" style="max-width:@colSize">
-                @if (!robot.Nombre.Contains("ALLIANZ") && !robot.Nombre.Contains("FENIX") && !robot.Nombre.Contains("HELVETIA"))
-                {
-                    continue;
-                }
-                @if (robot.Nombre.Contains("_AP"))
-                {
-                    continue;
-                }
-
-                @if (robot.ErroresDia == 0)
-                {
-                    <h3 class="alert-success bertran-col-head">
-                        @robot.Nombre<br>
-                    </h3>
-                }
-                else
-                {
-                    <h3 class="alert-danger bertran-col-head">
-                        @robot.Nombre
-                        <br>
-                    </h3>
-                }
-
+                </h4>
                 <p>
                     Robot Padre: @robot.RobotPadre
                 </p>
 
-                <p>
-                    Estado: @robot.Estado
-                </p>
+                @if (robot.ErroresDia == 0 && robot.Estado == "EN EJECUCION")
+                {
+                    <h4 class="alert-success bertran-col-head">
+                        Estado: @robot.Estado
+                    </h4>
+                }
+                else
+                {
+                    @if (robot.ErroresDia == 0 && (robot.Estado == "EN ESPERA" || robot.Estado == "SOLO_PDTES"))
+                    {
+                        <h4 class="alert-warning bertran-col-head">
+                            Estado: @robot.Estado
+                        </h4>
+                    }
+                    else
+                    {
+                        <h4 class="alert-danger bertran-col-head">
+                            Estado: @robot.Estado
+                        </h4>
+                    }
+                }
 
                 <p>
                     Ultima Actualización: @robot.F_UltimaActualizacion
@@ -247,140 +126,117 @@
                 <p>
                     Total Ejecuciones: @robot.TotalEjecuciones
                 </p>
-
+                <button>Ver Detalle</button>
             </div>
+        </article>
+    }
+</main>
 
+
+
+<div>
+    <p><br /></p>
+    <h3><b><u>ROBOTS PLATAFORMAS:</u></b></h3>
+</div>
+<main class="grid col-md2 jumbotron">
+    @foreach (var robot in Model)
+    {
+        @if (robot.Nombre.Contains("OCASO"))
+        {
+            continue;
+        }
+        @if (robot.TipoRobot == "APERTURAS")
+        {
+            continue;
+        }
+        <article>
+            @{string nombreImagen = @robot.Nombre + ".png";}
+            <img src="~/images/img_robots/@nombreImagen" class="img-responsive" alt=@robot.Nombre height="20px">
+        <div class="text">
+            @{string nombreRobot = @robot.Nombre;}
+
+            <h4>
+                @if (nombreRobot.Length > 9 && (!robot.Nombre.Contains("ALLIANZ") && !robot.Nombre.Contains("FENIX") && !robot.Nombre.Contains("HELVETIA")))
+                {
+                    nombreRobot = nombreRobot.Substring(0, 9) + ".";
+                }
+                else
+                {
+                    @if (robot.Nombre.Contains("ALLIANZ") || robot.Nombre.Contains("FENIX") || robot.Nombre.Contains("HELVETIA"))
+                    {
+                        @if (robot.Nombre.Contains("ALLIANZ"))
+                        {
+                            nombreRobot = "ALLIANZ";
+                        }
+                        else if (robot.Nombre.Contains("FENIX"))
+                        {
+                            nombreRobot = "FENIX";
+                        }
+                        else
+                        {
+                            nombreRobot = "HELVETIA";
+                        }
+                    }
+                }
+                @nombreRobot
+            </h4>
+            <p>
+                Robot Padre: @robot.RobotPadre
+            </p>
+
+            @if (robot.ErroresDia == 0 && robot.Estado == "EN_EJECUCION")
+            {
+                <h4 class="alert-success bertran-col-head">
+                    Estado: @robot.Estado
+                </h4>
             }
-        </div>*@
+            else
+            {
+                @if (robot.ErroresDia == 0 && (robot.Estado == "ESPERA" || robot.Estado == "SOLO_PDTES"))
+                {
+                    <h4 class="alert-warning bertran-col-head">
+                        Estado: @robot.Estado
+                    </h4>
+                }
+                else
+                {
+                    <h4 class="alert-danger bertran-col-head">
+                        Estado: @robot.Estado
+                    </h4>
+                }
+            }
 
-    @*<table class="table-responsive table-bordered">
-            <thead>
-                <tr>
+            <p>
+                Ultima Actualización: @robot.F_UltimaActualizacion
+            </p>
 
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        @if (robot.ErroresDia == 0)
-                        {
-                            <th class="alert-success">
-                                @robot.Nombre<br>
-                            </th>
-                        }
-                        else
-                        {
-                            <th class="alert-danger">
-                                @robot.Nombre
-                                <br>
-                            </th>
-                        }
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Robot Padre: @robot.RobotPadre
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Estado: @robot.Estado
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Ultima Actualización: @robot.F_UltimaActualizacion
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Errores Dia: @robot.ErroresDia
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Errores Corregidos: @robot.ErroresCorregidos
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        @if (!robot.Nombre.Contains("_PLAT"))
-                        {
-                            <td>
-                                Total Aperturas: @robot.TotalAP_PLAT
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                Total Plataformas: @robot.TotalAP_PLAT
-                            </td>
-                        }
-                    }
-                </tr>
-                <tr>
-                    @foreach (var robot in Model)
-                    {
-                        @if (robot.Nombre.Contains("OCASO"))
-                        {
-                            continue;
-                        }
-                        <td>
-                            Total Ejecuciones: @robot.TotalEjecuciones
-                        </td>
-                    }
-                </tr>
-            </tbody>
-        </table>*@
+            <p>
+                Errores Dia: @robot.ErroresDia
+            </p>
 
-    @*</div>*@
-    @*<a href="/Home/Alta">Agregar</a>*@
-    @*<a href="">Agregar</a>*@
+            <p>
+                Errores Corregidos: @robot.ErroresCorregidos
+            </p>
 
 
+            @if (!robot.Nombre.Contains("_PLAT"))
+            {
+                <p>
+                    Total Aperturas: @robot.TotalAP_PLAT
+                </p>
+            }
+            else
+            {
+                <p>
+                    Total Plataformas: @robot.TotalAP_PLAT
+                </p>
+            }
 
-
-
+            <p>
+                Total Ejecuciones: @robot.TotalEjecuciones
+            </p>
+            <button>Ver Detalle</button>
+        </div>
+        </article>
+    }
+</main>

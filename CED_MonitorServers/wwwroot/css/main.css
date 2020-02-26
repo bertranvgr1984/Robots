@@ -1,0 +1,327 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    column-count: 1;
+    column-gap: 2em;
+    column-rule: 1px solid #bbb;
+}*/
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+
+/*.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+main {
+    column-count: 2;
+    column-gap: 3em;
+    column-rule: 1px solid #bbb;
+}
+.jumbotron {
+    font-family: Rockwell;
+}*/
+
+.bertran-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    /*column-count: 1;
+    column-gap: 2em;
+    column-rule: 1px solid #bbb;*/
+}
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.bertran-navbar-li {
+    font-size: 16px;
+    font-family: Rockwell;
+    color: white;
+}
+
+.bertran-navbar-li:hover {
+    color: dodgerblue;
+}
+
+.bertran-navbar-li-Home {
+    font-size: 22px;
+    font-family: Rockwell;
+    color: lawngreen;
+}
+
+.bertran-navbar-li-Home:hover {
+    color:forestgreen;
+}
+
+.bertran-navbar-li-navbar-brand {
+    /* 20200128 VGR: Viene de bootstrap.css navbar-brand*/
+    display: inline-block;
+    padding-bottom: 0.2359375rem;
+    margin-right: 2rem;
+    /*font-size: 2.09375rem;*/
+    line-height: inherit;
+    white-space: nowrap;
+    font-size: 26px;
+    font-family: Rockwell;
+    color: dodgerblue;
+    margin-top: 0.12em
+}
+
+.bertran-navbar-li-navbar-brand:hover {
+    color: lightblue;
+}
+
+.bertran-col {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1rem;
+    min-height: 1px;
+    border-left-style: outset;
+    border-left-color: lightgray;
+    border-bottom-style: outset;
+    border-bottom-color: lightgray;
+    border-right-style: outset;
+    border-right-color: lightgray;
+    border-top-style: outset;
+    border-top-color: lightgray;
+    margin-right: 1em;
+    margin-bottom: 3em;
+}
+
+.bertran-col-head {
+    border-left-style: outset;
+    border-left-color: lightgray;
+    border-bottom-style: outset;
+    border-bottom-color: lightgray;
+    border-right-style: outset;
+    border-right-color: lightgray;
+    border-top-style: outset;
+    border-top-color: lightgray;
+    font-size: 18px;
+    font-family: Rockwell;
+    margin-right: 2em;
+    margin-bottom: 1em;
+}
+
+.bertran-recuadro {
+    background-color: hsl(20, 50%, 80%);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 10px;
+    align-items: stretch;
+}
+
+.grid > article {
+    border: 2px solid #ccc;
+    box-shadow: 3px 2px 3px 0px rgba(0,0,0,0.3);
+}
+
+.grid > article img {
+    max-width: 100%;
+}
+
+.text {
+    padding: 0 20px 20px;
+}
+
+.text > button {
+    background: gray;
+    border: 0;
+    color: white;
+    padding: 10px;
+    width: 100%;
+}
+
+#h_memcpu h5{
+    display: inline;
+}
+
+
+
+/* --------------------- //
+    CED_MAIN (Madrid)
+   --------------------- */
+top h3 {
+    padding-left: 15px;
+}
+
+.top-nav .blue-line, .top-nav .green-line, .top-nav .purple-line {
+    display: inline-block;
+    height: 7px;
+    margin-top: 2px;
+    float: left;
+    clear: left;
+    margin-left: -100px;
+}
+
+.top-nav .blue-line, .top-nav .green-line, .top-nav .purple-line span hr {
+    
+}
+
+.top-nav .purple-line {
+    background: #56238e;
+    width: 450px
+}
+
+@media screen and (min-width:768px) {
+    .top-nav .purple-line {
+        width: 40%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    .top-nav .purple-line {
+        width: 45%;
+        max-width: 1130px
+    }
+}
+
+.top-nav .blue-line {
+    background: #3899dd;
+    width: 500px
+}
+
+@media screen and (min-width:768px) {
+    top .top-nav .blue-line {
+        width: 50%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    .top-nav .blue-line {
+        width: 55%;
+        max-width: 1380px
+    }
+}
+
+.top-nav .green-line {
+    background: #86bc35;
+    width: 400px
+}
+
+@media screen and (min-width:768px) {
+    .top-nav .green-line {
+        width: 30%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    .top-nav .green-line {
+        width: 35%;
+        max-width: 880px
+    }
+}
+/*
+.top-nav .green-line, .blue-line, .purple-line {
+    width="150"
+}
+
+
+
+@media screen and (min-width:768px) {
+    top .top-nav .lines
+
+{
+    position: absolute;
+    left: 0;
+    width: 100%
+}
+
+}
+
+top .top-nav .blue-line, top .top-nav .green-line, top .top-nav .purple-line {
+    display: inline-block;
+    height: 7px;
+    margin-top: 7px;
+    width: 200px;
+    float: left;
+    clear: left;
+    margin-left: -500px
+}
+
+@media screen and (min-width:768px) {
+    top .top-nav .blue-line, top .top-nav .green-line, top .top-nav .purple-line {
+        margin-left: -100px
+    }
+}
+
+@media screen and (min-width:992px) {
+    top .top-nav .blue-line, top .top-nav .green-line, top .top-nav .purple-line {
+        margin-left: 0
+    }
+}
+
+top .top-nav .purple-line {
+    background: #56238e;
+    width: 450px
+}
+
+@media screen and (min-width:768px) {
+    top .top-nav .purple-line {
+        width: 40%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    top .top-nav .purple-line {
+        width: 45%;
+        max-width: 1130px
+    }
+}
+
+top .top-nav .blue-line {
+    background: #3899dd;
+    width: 500px
+}
+
+@media screen and (min-width:768px) {
+    top .top-nav .blue-line {
+        width: 50%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    top .top-nav .blue-line {
+        width: 55%;
+        max-width: 1380px
+    }
+}
+
+top .top-nav .green-line {
+    background: #86bc35;
+    width: 400px
+}
+
+@media screen and (min-width:768px) {
+    top .top-nav .green-line {
+        width: 30%
+    }
+}
+
+@media screen and (min-width:1170px) {
+    top .top-nav .green-line {
+        width: 35%;
+        max-width: 880px
+    }
+}
+
+top .doormat {
+    background: rgba(0,0,0,.8);
+    padding: 2em 0;
+    overflow: hidden
+}*/

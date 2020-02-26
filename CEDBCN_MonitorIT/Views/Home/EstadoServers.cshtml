@@ -1,90 +1,394 @@
 ﻿@model IEnumerable<CEDBCN_MonitorIT.Models.MonitorServers>
 
+<meta http-equiv="refresh" content="1">
+
+
 @{
-    ViewData["Title"] = "Estado Servidores";
+    ViewData["Title"] = "Estado Servidores y Servicios";
 }
 
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Aquí se mostrará el Estado de los Servidores de RDS y Citrix.</p>
+<p>Aquí se mostrará el Estado de los Servidores y Servicios</p>
 
-<h3>Servidor RDS</h3>
-    <table class="table-responsive">
+<div class="jumbotron">
+    <h3 class="left"><b><u>Estado VPN</u></b></h3>
+</div>
+
+<div class="jumbotron">
+    <h3 class="left"><b><u>Estado Correo y SMS</u></b></h3>
+</div>
+
+<div class="jumbotron">
+    <h3 class="left"><b><u>Servidores RDS</u></b></h3>
+
+    <main class="grid jumbotron left-align">
+        @{
+            List<string> lstServers = new List<string>();
+            string[] desgloseLinea = null;
+            bool estaVaCIO = false;
+            int usersMAXLenght = 0;
+        }
         @foreach (var server in Model)
         {
-            @*@DataTable dt = new DataTable();*@
-            <tr>
-                @if (server.TipoServidor == "RDS")
+            desgloseLinea = server.usuarios.Trim(' ').Split("-");
+            @if (usersMAXLenght < desgloseLinea.Length)
+            {
+                usersMAXLenght = desgloseLinea.Length;
+            }
+            desgloseLinea = server.discos.Trim(' ').Split("-");
+            @if (usersMAXLenght < desgloseLinea.Length)
+            {
+                usersMAXLenght = desgloseLinea.Length;
+            }
+        }
+        @foreach (var server in Model)
+        {
+            estaVaCIO = false;
+            @if (!lstServers.Contains(server.Servidor))
+            {
+                @if (server.TipoServidor != "SQLSERVER")
                 {
-                    <th>
-                        @server.Servidor
-                    </th>
-                    <th>
-                        MEMORIA
-                    </th>
-                    <th>
-                        CPU
-                    </th>
+                    lstServers.Add(server.Servidor);
                 }
                 else
                 {
                     continue;
                 }
-            </tr>
-            <tr>
-                @if (server.usuarios.Contains("-"))
-                {
-                    string[] desgloseUsuarios = server.usuarios.Trim(' ').Split("-");
-                    <td>
+            }
+            else
+            {
+                continue;
+            }
+            <article>
+                <div class="text-center">
+                    @if (server.TipoServidor == "RDS" || server.TipoServidor == "SQLSERVER")
+                    {
+                        <h4 class="green-text">
+                            @server.Servidor
+                        </h4>
+                        <h4 class="blue-grey-text">
+                            <b class="blue-text">Servidor :</b> @server.Servidor.Substring(@server.Servidor.Length - 1, 1)
+                        </h4>
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    @{
+                        //Comprobamos que sino es del mismo día, no lo mostramos
+                        string fechaHoy = DateTime.Now.ToString();
+                        string fechaBD = server.fecha.ToString();
+                        string nomLinea = string.Empty;
+                        string nomDisco = string.Empty;
+                        string[] desgloseFechaBD = fechaBD.Split(' ');
+                        string[] desgloseFechaHoy = fechaHoy.Split(' ');
+                        string[] desgloseHoraBD = desgloseFechaBD[1].Split(':');
+                        string[] desgloseHoraHoy = desgloseFechaHoy[1].Split(':');
+                        int difMinutos = 0;
+
+                        difMinutos = int.Parse(desgloseHoraHoy[1]) - int.Parse(desgloseHoraBD[1]);
+
+                        if ((desgloseFechaHoy[0] != desgloseFechaBD[0]) || (desgloseHoraHoy[0] != desgloseHoraBD[0]) && difMinutos <= 5)
+                        {
+                            estaVaCIO = true;
+                            continue;
+                        }
+                    }
+
+                    @if (server.usuarios.Contains("-") || server.discos.Contains("-"))
+                    {
                         <ul>
-                            <b>Usuarios:</b>
-                            @for (int i = 0; i < desgloseUsuarios.Length; i++)
+                            @if (server.TipoServidor == "RDS")
                             {
-                                @if (desgloseUsuarios[i] == "")
+                                <b>Usuarios:</b>
+                            }
+                            else
+                            {
+                                <b>HDDs:</b>
+                            }
+
+                            @for (int j = 0; j < usersMAXLenght; j++)
+                            {
+                                @if (server.TipoServidor == "RDS" || server.TipoServidor == "SQLSERVER")
                                 {
-                                    continue;
+                                    @if (server.TipoServidor == "RDS")
+                                    {
+                                        desgloseLinea = server.usuarios.Split('-');
+                                    }
+                                    else
+                                    {
+                                        desgloseLinea = server.discos.Split('-');
+                                    }
+                                }
+
+                                @for (int i = 0; i < desgloseLinea.Length; i++)
+                                {
+                                    @if (desgloseLinea[i] == "" || estaVaCIO)
+                                    {
+                                        <li>----</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@desgloseLinea[i]</li>
+                                    }
+                                    j++;
+                                }
+                                @if (desgloseLinea.Length < usersMAXLenght)
+                                {
+                                    @for (int k = 0; k < (usersMAXLenght - desgloseLinea.Length); k++)
+                                    {
+                                        <li>----</li>
+                                        j++;
+                                    }
                                 }
                                 else
                                 {
-                                    <li>    @desgloseUsuarios[i]</li>
+                                    break;
                                 }
+                                break;
                             }
                         </ul>
-                    </td>
-                    <td>
-                        @if (@server.memoria >= 80)
+
+                        <h5>
+                            MEMORIA
+                        </h5>
+                        @if (@server.memoria >= 80 && !estaVaCIO)
                         {
-                            <p class="text-danger"> @server.memoria %</p>
+                            <p class="text-danger text-center"> @server.memoria %</p>
+                            //Pitido
                         }
                         else
                         {
-                            <p>@server.memoria %</p>
+                            @if (@server.memoria < 80 && !estaVaCIO)
+                            {
+                                <p class="text-center">@server.memoria %</p>
+                            }
+                            else
+                            {
+                                <p class="text-center">----</p>
+                            }
                         }
-                    </td>
-                    <td>
+
+                        <h5>
+                            CPU
+                        </h5>
                         @if (@server.cpu >= 80)
                         {
-                            <p class="text-danger">@server.cpu %</p>
+                            <p class="text-danger text-center">@server.cpu %</p>
                         }
                         else
                         {
-                            <p>@server.cpu %</p>
+                            @if (@server.cpu < 80 && !estaVaCIO)
+                            {
+                                <p class="text-center">@server.cpu %</p>
+                            }
+                            else
+                            {
+                                <p class="text-center">----</p>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                </div>
+            </article>
+        }
+    </main>
+</div>
+
+
+<div class="jumbotron">
+    <h3 class="left"><b><u>Servidor SQLSERVER</u></b></h3>
+
+    <main class="grid jumbotron left-align">
+        @foreach (var server in Model)
+        {
+            @if (server.TipoServidor == "SQLSERVER")
+            {
+                desgloseLinea = server.discos.Trim(' ').Split("-");
+                @if (usersMAXLenght < desgloseLinea.Length)
+                {
+                    usersMAXLenght = desgloseLinea.Length;
+                }
+            }
+        }
+        @foreach (var server in Model)
+        {
+            estaVaCIO = false;
+            @if (!lstServers.Contains(server.Servidor))
+            {
+                lstServers.Add(server.Servidor);
+            }
+            else
+            {
+                continue;
+            }
+            <article>
+                <div class="text-center">
+                    @if (server.TipoServidor == "SQLSERVER")
+                    {
+                        <h4 class="green-text">
+                            @server.Servidor
+                        </h4>
+                        <h4 class="blue-grey-text">
+                            <b class="blue-text">Servidor :</b> @server.Servidor.Substring(@server.Servidor.Length - 1, 1)
+                        </h4>
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    @{
+                        //Comprobamos que sino es del mismo día, no lo mostramos
+                        string fechaHoy = DateTime.Now.ToString();
+                        string fechaBD = server.fecha.ToString();
+                        string nomLinea = string.Empty;
+                        string nomDisco = string.Empty;
+                        string letraDisco = string.Empty;
+                        string ocupacionDisco = string.Empty;
+
+                        string[] desgloseFechaBD = fechaBD.Split(' ');
+                        string[] desgloseFechaHoy = fechaHoy.Split(' ');
+                        string[] desgloseHoraBD = desgloseFechaBD[1].Split(':');
+                        string[] desgloseHoraHoy = desgloseFechaHoy[1].Split(':');
+                        int difMinutos = 0;
+
+                        difMinutos = int.Parse(desgloseHoraHoy[1]) - int.Parse(desgloseHoraBD[1]);
+
+                        if ((desgloseFechaHoy[0] != desgloseFechaBD[0]) || (desgloseHoraHoy[0] != desgloseHoraBD[0]) && difMinutos <= 5)
+                        {
+                            estaVaCIO = true;
+                            continue;
+                        }
+                    }
+
+                    @if (server.usuarios.Contains("-") || server.discos.Contains("-"))
+                    {
+                        <ul>
+                            <b>HDDs:</b>
+
+                            @for (int j = 0; j < usersMAXLenght; j++)
+                            {
+                                @if (server.TipoServidor == "SQLSERVER")
+                                {
+                                    desgloseLinea = server.discos.Split(new string[] { " - " }, StringSplitOptions.None);
+                                }
+
+                                @for (int i = 0; i < desgloseLinea.Length; i++)
+                                {
+                                    @if (server.discos != null && server.discos != "")
+                                    {
+                                        @if (desgloseLinea[i] != "")
+                                        {
+                                            @if (i > 0)
+                                            {
+                                                letraDisco = desgloseLinea[i].TrimStart(' ').TrimEnd().Substring(0, 2);
+                                                ocupacionDisco = desgloseLinea[i].Substring(2, desgloseLinea[i].Length - 2);
+                                                if (ocupacionDisco.Contains(".00"))
+                                                {
+                                                    ocupacionDisco = ocupacionDisco.Replace(".00", "");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                letraDisco = desgloseLinea[i].Substring(0, 2);
+                                                ocupacionDisco = desgloseLinea[i].Substring(2, desgloseLinea[i].Length - 2);
+                                                if (ocupacionDisco.Contains(".00"))
+                                                {
+                                                    ocupacionDisco = ocupacionDisco.Replace(".00", "");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            letraDisco = string.Empty;
+                                            ocupacionDisco = string.Empty;
+                                        }
+
+                                        @if (desgloseLinea[i] == "" || estaVaCIO)
+                                        {
+                                            <li>----</li>
+                                        }
+                                        else
+                                        {
+                                            <li><b>@letraDisco</b>   @ocupacionDisco</li>
+                                        }
+                                    }
+                                    j++;
+                                }
+                                @if (desgloseLinea.Length < usersMAXLenght)
+                                {
+                                    @for (int k = 0; k < (usersMAXLenght - desgloseLinea.Length); k++)
+                                    {
+                                        <li>----</li>
+                                        j++;
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                break;
+                            }
+                        </ul>
+
+                        <h5>
+                            MEMORIA
+                        </h5>
+                        @if (@server.memoria >= 80 && !estaVaCIO)
+                        {
+                            <p class="text-danger text-center"> @server.memoria %</p>
+                        }
+                        else
+                        {
+                            @if (@server.memoria < 80 && !estaVaCIO)
+                            {
+                                <p class="text-center">@server.memoria %</p>
+                            }
+                            else
+                            {
+                                <p class="text-center">----</p>
+                            }
                         }
 
-                    </td>
-                }
-                else
-                {
-                    continue;
-                }
-            </tr>
+                        <h5>
+                            CPU
+                        </h5>
+                        @if (@server.cpu >= 80)
+                        {
+                            <p class="text-danger text-center">@server.cpu %</p>
+                        }
+                        else
+                        {
+                            @if (@server.cpu < 80 && !estaVaCIO)
+                            {
+                                <p class="text-center">@server.cpu %</p>
+                            }
+                            else
+                            {
+                                <p class="text-center">----</p>
+                            }
 
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                </div>
+            </article>
         }
-    </table>
-
-@*<a href="/Home/Alta">Agregar</a>*@
-@*<a href="">Agregar</a>*@
+    </main>
+</div>
 
 
-<h3>Servidor CITRIX</h3>
+<div class="jumbotron">
+    <h3 class="left"><b><u>Servidor CITRIX</u></b></h3>
+</div>
